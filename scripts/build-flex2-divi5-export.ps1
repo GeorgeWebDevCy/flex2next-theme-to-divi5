@@ -348,8 +348,7 @@ $headerNavHtml = @'
     <a href="#contact" class="fx2-button fx2-button-small">Initiate Consultation</a>
   </div>
   <details class="fx2-mobile-nav">
-    <summary class="fx2-mobile-nav-toggle">
-      <span>Menu</span>
+    <summary class="fx2-mobile-nav-toggle" aria-label="Open navigation">
       <span class="fx2-mobile-nav-icon" aria-hidden="true">
         <span></span>
         <span></span>
