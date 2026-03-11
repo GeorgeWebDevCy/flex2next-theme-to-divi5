@@ -328,44 +328,22 @@ $sharedCssPostMeta = @(
 	}
 )
 
-$headerBrandHtml = @'
-<a href="/" class="fx2-brand-link" aria-label="Flex2 Ai Home">
+$siteBaseUrl = 'https://dominicb83.sg-host.com/'
+$philosophyUrl = "${siteBaseUrl}#philosophy"
+$workflowsUrl = "${siteBaseUrl}#workflows"
+$benefitsUrl = "${siteBaseUrl}#benefits"
+$contactUrl = "${siteBaseUrl}#contact"
+
+$headerBrandHtml = @"
+<a href="$siteBaseUrl" class="fx2-brand-link" aria-label="Flex2 Ai Home">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
     <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"></path>
   </svg>
   <span>Flex2 Ai</span>
 </a>
-'@
+"@
 
-$headerNavHtml = @'
-<div class="fx2-header-nav-inner">
-  <div class="fx2-header-nav-desktop">
-    <nav class="fx2-header-links" aria-label="Primary">
-      <a href="#philosophy">Philosophy</a>
-      <a href="#workflows">Workflows</a>
-      <a href="#benefits">Benefits</a>
-    </nav>
-    <a href="#contact" class="fx2-button fx2-button-small">Initiate Consultation</a>
-  </div>
-  <details class="fx2-mobile-nav">
-    <summary class="fx2-mobile-nav-toggle" aria-label="Open navigation">
-      <span class="fx2-mobile-nav-icon" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-      </span>
-    </summary>
-    <div class="fx2-mobile-nav-panel">
-      <nav class="fx2-mobile-nav-links" aria-label="Mobile Primary">
-        <a href="#philosophy">Philosophy</a>
-        <a href="#workflows">Workflows</a>
-        <a href="#benefits">Benefits</a>
-      </nav>
-      <a href="#contact" class="fx2-button fx2-button-small fx2-mobile-nav-cta">Initiate Consultation</a>
-    </div>
-  </details>
-</div>
-'@
+$headerNavHtml = "<div class=`"fx2-header-nav-inner`"><div class=`"fx2-header-nav-desktop`"><nav class=`"fx2-header-links`" aria-label=`"Primary`"><a href=`"$philosophyUrl`">Philosophy</a><a href=`"$workflowsUrl`">Workflows</a><a href=`"$benefitsUrl`">Benefits</a></nav><a href=`"$contactUrl`" class=`"fx2-button fx2-button-small`">Initiate Consultation</a></div><details class=`"fx2-mobile-nav`"><summary class=`"fx2-mobile-nav-toggle`" aria-label=`"Open navigation`"><span class=`"fx2-mobile-nav-icon`" aria-hidden=`"true`"><span></span><span></span><span></span></span></summary><div class=`"fx2-mobile-nav-panel`"><nav class=`"fx2-mobile-nav-links`" aria-label=`"Mobile Primary`"><a href=`"$philosophyUrl`">Philosophy</a><a href=`"$workflowsUrl`">Workflows</a><a href=`"$benefitsUrl`">Benefits</a></nav><a href=`"$contactUrl`" class=`"fx2-button fx2-button-small fx2-mobile-nav-cta`">Initiate Consultation</a></div></details></div>"
 
 $heroTitleHtml = @'
 <h1>Invisible<br /><span>Intelligence.</span></h1>
@@ -375,12 +353,12 @@ $heroCopyHtml = @'
 <p>We engineer bespoke automation workflows that silently eradicate tedious admin, drastically reduce overhead, and scale your business globally.</p>
 '@
 
-$heroActionsHtml = @'
+$heroActionsHtml = @"
 <div class="fx2-hero-actions-wrap">
-  <a href="#contact" class="fx2-button fx2-button-large">Automate Your Future <span aria-hidden="true">&rarr;</span></a>
+  <a href="$contactUrl" class="fx2-button fx2-button-large">Automate Your Future <span aria-hidden="true">&rarr;</span></a>
   <p class="fx2-hero-coverage">Servicing UK, US &amp; EU Markets</p>
 </div>
-'@
+"@
 
 $locationsIntroHtml = @'
 <p>Optimized for enterprise scale across global jurisdictions</p>

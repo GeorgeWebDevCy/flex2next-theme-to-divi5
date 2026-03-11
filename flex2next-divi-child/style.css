@@ -310,6 +310,8 @@ body::after {
 .fx2-mobile-nav-icon {
 	display: grid;
 	gap: 0.12rem;
+	line-height: 0;
+	font-size: 0;
 }
 
 .fx2-mobile-nav-icon span {
@@ -318,6 +320,13 @@ body::after {
 	height: 2px;
 	border-radius: 999px;
 	background: currentColor;
+}
+
+.fx2-mobile-nav-toggle br,
+.fx2-mobile-nav-icon br,
+.fx2-mobile-nav-panel br,
+.fx2-mobile-nav-links br {
+	display: none;
 }
 
 .fx2-mobile-nav-panel {
@@ -347,6 +356,7 @@ body::after {
 }
 
 .fx2-mobile-nav-links a {
+	display: block;
 	padding: 0.85rem 0;
 	border-bottom: 1px solid rgba(250, 250, 250, 0.08);
 	color: var(--fx2-foreground);
@@ -361,6 +371,10 @@ body::after {
 
 .fx2-mobile-nav-cta {
 	width: 100%;
+}
+
+.fx2-mobile-nav-panel p {
+	margin: 0;
 }
 
 .et_pb_section.fx2-home-hero {
