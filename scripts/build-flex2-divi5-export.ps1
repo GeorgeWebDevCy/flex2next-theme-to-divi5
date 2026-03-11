@@ -281,7 +281,8 @@ function Write-JsonFile {
 	)
 
 	$json = $Data | ConvertTo-Json -Depth 100
-	$json | Set-Content -Path $Path -Encoding UTF8
+	$utf8NoBom = [System.Text.UTF8Encoding]::new($false)
+	[System.IO.File]::WriteAllText($Path, $json, $utf8NoBom)
 	Get-Content -Path $Path -Raw | ConvertFrom-Json | Out-Null
 }
 
