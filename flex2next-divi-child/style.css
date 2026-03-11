@@ -278,13 +278,17 @@ body::after {
 .fx2-mobile-nav {
 	display: none;
 	position: relative;
+	align-items: center;
 }
 
 .fx2-mobile-nav-toggle {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	padding: 0.4rem 0.15rem;
+	width: 3rem;
+	min-width: 3rem;
+	height: 3rem;
+	padding: 0;
 	border: 0;
 	border-radius: 0;
 	background: transparent;
@@ -305,12 +309,12 @@ body::after {
 
 .fx2-mobile-nav-icon {
 	display: grid;
-	gap: 0.14rem;
+	gap: 0.12rem;
 }
 
 .fx2-mobile-nav-icon span {
 	display: block;
-	width: 1.1rem;
+	width: 1.25rem;
 	height: 2px;
 	border-radius: 999px;
 	background: currentColor;
@@ -953,7 +957,8 @@ body.admin-bar .et_pb_section.fx2-global-header {
 	}
 
 	.fx2-mobile-nav {
-		display: block;
+		display: inline-flex;
+		align-items: center;
 	}
 
 	.fx2-location-list li {
@@ -978,11 +983,15 @@ body.admin-bar .et_pb_section.fx2-global-header {
 
 @media (max-width: 767px) {
 	:root {
-		--fx2-header-offset: 6.25rem;
+		--fx2-header-offset: 5.25rem;
 	}
 
 	.et_pb_section.fx2-global-header {
-		padding: 0.9rem 0;
+		padding: 0.45rem 0;
+	}
+
+	.fx2-header-row {
+		min-height: 4.5rem;
 	}
 
 	.fx2-mobile-nav-panel {
