@@ -5,6 +5,7 @@ $repoRoot = Split-Path -Parent $PSScriptRoot
 $outputDir = Join-Path $repoRoot 'exports'
 $homepageOutputPath = Join-Path $outputDir 'flex2next-divi5-homepage.json'
 $themeBuilderOutputPath = Join-Path $outputDir 'flex2next-divi5-theme-builder.json'
+$childThemeStylePath = Join-Path $repoRoot 'flex2next-divi-child/style.css'
 
 New-Item -ItemType Directory -Force -Path $outputDir | Out-Null
 
@@ -245,6 +246,19 @@ function New-SectionBlock {
 	return New-Block -BlockName 'divi/section' -Attrs $attrs -InnerBlocks $InnerBlocks
 }
 
+function Get-PortableStylesheetContent {
+	param(
+		[Parameter(Mandatory = $true)]
+		[string]$Path
+	)
+
+	$css = Get-Content -Path $Path -Raw
+	$css = [regex]::Replace($css, '(?s)^/\*.*?\*/\s*', '')
+	$css = [regex]::Replace($css, '(?s)@font-face\s*\{.*?\}\s*', '')
+
+	return $css.Trim()
+}
+
 function New-ThemeBuilderLayoutExport {
 	param(
 		[Parameter(Mandatory = $true)]
@@ -254,7 +268,8 @@ function New-ThemeBuilderLayoutExport {
 		[Parameter(Mandatory = $true)]
 		[string]$PostType,
 		[Parameter(Mandatory = $true)]
-		[bool]$IsGlobal
+		[bool]$IsGlobal,
+		[object[]]$PostMeta = @()
 	)
 
 	return [ordered]@{
@@ -268,7 +283,7 @@ function New-ThemeBuilderLayoutExport {
 		theme_builder = [ordered]@{
 			is_global = $IsGlobal
 		}
-		post_meta     = [ordered]@{}
+		post_meta     = $PostMeta
 	}
 }
 
@@ -303,6 +318,14 @@ $globalVariables = @(
 	@{ id = 'gvid-flex2-radius-pill'; label = 'Pill Radius'; value = '999rem'; status = 'active'; type = 'numbers' },
 	@{ id = 'gvid-flex2-font-body'; label = 'Body Font'; value = 'Flex2 Geist'; status = 'active'; type = 'fonts' },
 	@{ id = 'gvid-flex2-font-mono'; label = 'Mono Font'; value = 'Flex2 Geist Mono'; status = 'active'; type = 'fonts' }
+)
+
+$portableSharedCss = Get-PortableStylesheetContent -Path $childThemeStylePath
+$sharedCssPostMeta = @(
+	[ordered]@{
+		key   = '_et_pb_custom_css'
+		value = $portableSharedCss
+	}
 )
 
 $headerBrandHtml = @'
@@ -632,7 +655,9 @@ $homepageExport = [ordered]@{
 	presets            = @()
 	global_colors      = $globalColors
 	global_variables   = $globalVariables
-	page_settings_meta = [ordered]@{}
+	page_settings_meta = [ordered]@{
+		_et_pb_custom_css = $portableSharedCss
+	}
 	canvases           = [ordered]@{
 		local  = @()
 		global = @()
@@ -671,8 +696,8 @@ $themeBuilderExport = [ordered]@{
 		}
 	)
 	layouts             = [ordered]@{
-		"$headerLayoutId" = New-ThemeBuilderLayoutExport -LayoutId $headerLayoutId -LayoutContent $headerLayoutContent -PostType 'et_header_layout' -IsGlobal $true
-		"$footerLayoutId" = New-ThemeBuilderLayoutExport -LayoutId $footerLayoutId -LayoutContent $footerLayoutContent -PostType 'et_footer_layout' -IsGlobal $true
+		"$headerLayoutId" = New-ThemeBuilderLayoutExport -LayoutId $headerLayoutId -LayoutContent $headerLayoutContent -PostType 'et_header_layout' -IsGlobal $true -PostMeta $sharedCssPostMeta
+		"$footerLayoutId" = New-ThemeBuilderLayoutExport -LayoutId $footerLayoutId -LayoutContent $footerLayoutContent -PostType 'et_footer_layout' -IsGlobal $true -PostMeta $sharedCssPostMeta
 	}
 	has_default_template = $true
 	has_global_layouts   = $true
