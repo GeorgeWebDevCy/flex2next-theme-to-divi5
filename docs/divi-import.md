@@ -3,46 +3,46 @@
 Files created for the migration:
 
 - `exports/flex2next-divi5-homepage.json`
+- `exports/flex2next-divi5-theme-builder.json`
 - `flex2next-divi-child/`
 - `scripts/build-flex2-divi5-export.ps1`
 
 ## What the export includes
 
-- A Divi 5-native layout built from `divi/*` blocks, not legacy `et_pb_*` shortcodes.
-- Flex2 global colors imported as Divi global colors.
-- Flex2 spacing, typography, radius, and sizing tokens imported as Divi global variables.
-- Page-level custom CSS that recreates the current dark Flex2 one-page site.
-- A single shortcode in the layout: `[fluentform id="1"]`.
+- A Divi 5 homepage layout built from `divi/*` blocks.
+- A Divi Theme Builder export that creates the default website template with a global header and global footer.
+- Flex2 global colors and variables imported into Divi.
+- Shared site styling loaded from the child theme instead of page-only custom CSS.
+- The contact form rendered from `[fluentform id="1"]` inside a Divi text module so the shortcode executes on the front end.
 
 ## Import order
 
-1. Activate the `Divi` parent theme or the `flex2next-divi-child` theme.
-2. In WordPress, create or open the homepage you want to use.
-3. Enable Divi Builder on that page.
-4. Open Divi portability import and import `exports/flex2next-divi5-homepage.json`.
-5. Set the page template to `Blank Page` so the Divi layout controls the header and footer.
-6. Set that page as the site homepage in WordPress settings.
+1. Activate the `flex2next-divi-child` theme.
+2. Open `Divi > Theme Builder`.
+3. Use Divi portability import there and import `exports/flex2next-divi5-theme-builder.json`.
+4. When prompted, import it as the default website template so the global header and footer are assigned correctly.
+5. Create or open the homepage you want to use and enable Divi Builder on that page.
+6. Import `exports/flex2next-divi5-homepage.json` into that page.
+7. Keep the page on the normal/default template. Do not use `Blank Page`, because the Theme Builder now supplies the header and footer.
+8. Set that page as the site homepage in WordPress settings.
 
 ## Child theme
 
-The child theme is intentionally minimal:
+The child theme is now required for the migration if you want the imported layout to match the source design:
 
-- It only declares the Flex2 Geist font faces.
-- It does not lock content into PHP templates.
-- All homepage structure and copy remain editable inside Divi.
+- It loads the Flex2 Geist and Geist Mono font faces.
+- It contains the shared styling for the homepage plus the Theme Builder header and footer.
+- It keeps the content editable in Divi instead of locking the site into PHP templates.
 
 ## Fluent Forms note
 
-The layout uses `[fluentform id="1"]` exactly as requested.
+The layout uses `[fluentform id="1"]`.
 
 The repository file `fluentform-export-forms-1-11-03-2026.json` appears to contain a form with `id: 2`, not `id: 1`.
 
-If your imported/contact form ends up with a different ID:
+If your final form ID is different after import, update the shortcode inside the Divi contact section text module.
 
-- either update the shortcode inside Divi after import, or
-- recreate/import the form so the final shortcode really is `[fluentform id="1"]`.
-
-## Regenerating the export
+## Regenerating the exports
 
 Run:
 

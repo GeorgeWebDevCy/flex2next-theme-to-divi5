@@ -1,10 +1,10 @@
 /*
 Theme Name: Flex2 Next Divi Child
 Theme URI: https://flex2.group/
-Description: Minimal Divi child theme for the Flex2 Next migration. It only loads the custom Geist font faces used by the imported Divi 5 layout.
-Author: George Nicolaou	
+Description: Divi child theme for the Flex2 Next migration. It loads the custom Geist fonts and the shared styling used by the imported homepage and Theme Builder templates.
+Author: George Nicolaou
 Template: Divi
-Version: 1.0.0
+Version: 1.1.0
 Text Domain: flex2next-divi-child
 */
 
@@ -22,4 +22,874 @@ Text Domain: flex2next-divi-child
 	font-weight: 100 900;
 	font-display: swap;
 	src: url("assets/fonts/flex2-geist-mono.woff2") format("woff2");
+}
+
+:root {
+	--fx2-background: #000;
+	--fx2-foreground: #fafafa;
+	--fx2-primary: #fafafa;
+	--fx2-primary-foreground: #000;
+	--fx2-surface: rgba(250, 250, 250, 0.05);
+	--fx2-surface-strong: rgba(250, 250, 250, 0.08);
+	--fx2-border: rgba(250, 250, 250, 0.1);
+	--fx2-text-secondary: rgba(250, 250, 250, 0.6);
+	--fx2-text-tertiary: rgba(250, 250, 250, 0.4);
+	--fx2-text-subtle: rgba(250, 250, 250, 0.5);
+	--fx2-inverted-background: #f5f5f5;
+	--fx2-inverted-foreground: #000;
+	--fx2-inverted-muted: rgba(0, 0, 0, 0.6);
+	--fx2-inverted-surface: #eee;
+	--fx2-inverted-surface-hover: #dedede;
+	--fx2-radius-card: 1.5rem;
+	--fx2-radius-pill: 999px;
+	--fx2-site-width: 80rem;
+	--fx2-content-width: 48rem;
+	--fx2-section-space: clamp(5rem, 8vw, 8rem);
+	--fx2-header-offset: 5.75rem;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background: radial-gradient(circle at 50% 20%, #151515 0%, var(--fx2-background) 65%);
+	color: var(--fx2-foreground);
+	font-family: "Flex2 Geist", sans-serif;
+}
+
+body::before,
+body::after {
+	content: "";
+	position: fixed;
+	border-radius: 50%;
+	filter: blur(80px);
+	opacity: 0.35;
+	pointer-events: none;
+	z-index: 0;
+}
+
+body::before {
+	inset: -8rem auto auto -8rem;
+	width: min(40vw, 28rem);
+	height: min(40vw, 28rem);
+	background: rgba(250, 250, 250, 0.08);
+	animation: fx2-float-1 20s ease-in-out infinite alternate;
+}
+
+body::after {
+	inset: auto -6rem -6rem auto;
+	width: min(30vw, 22rem);
+	height: min(30vw, 22rem);
+	background: rgba(250, 250, 250, 0.04);
+	animation: fx2-float-2 18s ease-in-out infinite alternate;
+}
+
+#page-container,
+#main-content,
+#et-main-area,
+#et-boc,
+.et-l {
+	background: transparent !important;
+	position: relative;
+	z-index: 1;
+}
+
+.et_pb_section.fx2-global-header,
+.et_pb_section.fx2-global-footer,
+.et_pb_section.fx2-home-hero,
+.et_pb_section.fx2-home-locations,
+.et_pb_section.fx2-home-philosophy,
+.et_pb_section.fx2-home-workflows,
+.et_pb_section.fx2-home-benefits,
+.et_pb_section.fx2-home-contact {
+	background: transparent;
+}
+
+.et_pb_row.fx2-container {
+	width: min(calc(100% - 3rem), var(--fx2-site-width)) !important;
+	max-width: none !important;
+}
+
+.fx2-header-brand,
+.fx2-header-nav,
+.fx2-home-hero-title,
+.fx2-home-hero-copy,
+.fx2-home-hero-actions,
+.fx2-home-locations-copy,
+.fx2-home-locations-list,
+.fx2-home-philosophy-title,
+.fx2-home-philosophy-copy,
+.fx2-home-philosophy-graphic,
+.fx2-home-workflows-intro,
+.fx2-home-workflow-card,
+.fx2-home-benefits-intro,
+.fx2-home-benefit-stat,
+.fx2-home-contact-copy,
+.fx2-home-contact-form,
+.fx2-footer-brand,
+.fx2-footer-legal,
+.fx2-footer-links {
+	margin-bottom: 0 !important;
+}
+
+.fx2-brand-link,
+.fx2-header-links a,
+.fx2-footer-links-shell a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.fx2-button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.6rem;
+	border-radius: var(--fx2-radius-pill);
+	background: var(--fx2-primary);
+	color: var(--fx2-primary-foreground) !important;
+	font-weight: 700;
+	line-height: 1;
+	text-decoration: none !important;
+	transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+	box-shadow: 0 0 30px rgba(250, 250, 250, 0.08);
+}
+
+.fx2-button:hover,
+.fx2-button:focus-visible {
+	transform: translateY(-2px);
+	box-shadow: 0 0 30px rgba(250, 250, 250, 0.2);
+}
+
+.fx2-button-small {
+	padding: 0.85rem 1.35rem;
+	font-size: 0.875rem;
+}
+
+.fx2-button-large {
+	padding: 1rem 1.65rem;
+	font-size: 1rem;
+}
+
+.et_pb_section.fx2-global-header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 999;
+	padding: 1.1rem 0;
+	background: rgba(0, 0, 0, 0.55);
+	border-bottom: 1px solid var(--fx2-border);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+}
+
+.fx2-header-row {
+	display: grid;
+	grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
+	align-items: center;
+	gap: 1.5rem;
+}
+
+.fx2-header-row > .et_pb_column {
+	width: auto !important;
+	margin: 0 !important;
+}
+
+.fx2-brand-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: -0.05em;
+}
+
+.fx2-brand-link svg {
+	width: 1.5rem;
+	height: 1.5rem;
+	flex: none;
+}
+
+.fx2-header-nav .et_pb_text_inner {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.fx2-header-nav-inner {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 1.5rem 2rem;
+	flex-wrap: wrap;
+}
+
+.fx2-header-links {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 0.75rem 2rem;
+	flex-wrap: wrap;
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--fx2-text-subtle);
+}
+
+.fx2-header-links a {
+	transition: color 0.2s ease;
+}
+
+.fx2-header-links a:hover,
+.fx2-header-links a:focus-visible {
+	color: var(--fx2-foreground);
+}
+
+.et_pb_section.fx2-home-hero {
+	padding: calc(var(--fx2-header-offset) + 4rem) 0 7rem;
+	min-height: 100svh;
+	display: flex;
+	align-items: center;
+	position: relative;
+	overflow: hidden;
+}
+
+.fx2-hero-row {
+	text-align: center;
+}
+
+.fx2-hero-row > .et_pb_column {
+	width: 100% !important;
+	margin: 0 !important;
+}
+
+.fx2-hero-column {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1.75rem;
+}
+
+.fx2-home-hero-title h1,
+.fx2-home-hero-copy p,
+.fx2-home-benefits-intro h2,
+.fx2-home-philosophy-title h2,
+.fx2-home-contact-copy h2,
+.fx2-home-workflows-intro h2 {
+	margin: 0;
+}
+
+.fx2-home-hero-title h1 {
+	font-size: clamp(3.75rem, 11vw, 10rem);
+	line-height: 0.9;
+	letter-spacing: -0.06em;
+	font-weight: 700;
+	color: var(--fx2-foreground);
+}
+
+.fx2-home-hero-title span {
+	color: transparent;
+	background: linear-gradient(180deg, var(--fx2-foreground), rgba(250, 250, 250, 0.3));
+	-webkit-background-clip: text;
+	background-clip: text;
+}
+
+.fx2-home-hero-copy .et_pb_text_inner {
+	max-width: 48rem;
+	margin: 0 auto;
+	font-size: clamp(1.15rem, 2vw, 1.875rem);
+	line-height: 1.6;
+	font-weight: 300;
+	color: var(--fx2-text-secondary);
+}
+
+.fx2-home-hero-actions .et_pb_text_inner {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.fx2-hero-actions-wrap {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.fx2-hero-coverage {
+	font-family: "Flex2 Geist Mono", monospace;
+	font-size: 0.75rem;
+	letter-spacing: 0.22em;
+	text-transform: uppercase;
+	color: var(--fx2-text-tertiary);
+}
+
+.et_pb_section.fx2-home-locations {
+	padding: 0;
+	background: var(--fx2-surface);
+	border-top: 1px solid var(--fx2-border);
+	border-bottom: 1px solid var(--fx2-border);
+}
+
+.fx2-locations-row {
+	display: grid;
+	grid-template-columns: minmax(0, 24rem) minmax(0, 1fr);
+	align-items: center;
+	gap: 1.5rem 2rem;
+	padding: 1.75rem 0;
+}
+
+.fx2-locations-row > .et_pb_column {
+	width: auto !important;
+	margin: 0 !important;
+}
+
+.fx2-home-locations-copy .et_pb_text_inner {
+	font-family: "Flex2 Geist Mono", monospace;
+	font-size: 0.875rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--fx2-text-subtle);
+}
+
+.fx2-home-locations-list .et_pb_text_inner {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.fx2-location-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 1rem 4rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.fx2-location-list li {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	color: var(--fx2-foreground);
+}
+
+.fx2-location-list svg {
+	width: 1.25rem;
+	height: 1.25rem;
+	flex: none;
+}
+
+.et_pb_section.fx2-home-philosophy,
+.et_pb_section.fx2-home-benefits,
+.et_pb_section.fx2-home-contact {
+	padding: var(--fx2-section-space) 0;
+}
+
+.fx2-philosophy-title-row,
+.fx2-philosophy-content-row,
+.fx2-workflows-intro-row,
+.fx2-workflows-grid-row,
+.fx2-benefits-intro-row,
+.fx2-benefits-stats-row,
+.fx2-contact-row,
+.fx2-footer-row {
+	display: grid;
+	gap: 2rem;
+}
+
+.fx2-philosophy-title-row > .et_pb_column,
+.fx2-philosophy-content-row > .et_pb_column,
+.fx2-workflows-intro-row > .et_pb_column,
+.fx2-workflows-grid-row > .et_pb_column,
+.fx2-benefits-intro-row > .et_pb_column,
+.fx2-benefits-stats-row > .et_pb_column,
+.fx2-contact-row > .et_pb_column,
+.fx2-footer-row > .et_pb_column {
+	width: auto !important;
+	margin: 0 !important;
+}
+
+.fx2-home-philosophy-title h2,
+.fx2-home-benefits-intro h2,
+.fx2-home-contact-copy h2,
+.fx2-home-workflows-intro h2 {
+	font-size: clamp(2.75rem, 6vw, 4.5rem);
+	line-height: 1.05;
+	letter-spacing: -0.05em;
+	font-weight: 700;
+}
+
+.fx2-home-philosophy-title .et_pb_text_inner {
+	max-width: 64rem;
+}
+
+.fx2-philosophy-content-row {
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	align-items: center;
+	gap: 3rem 6rem;
+	margin-top: 4rem;
+}
+
+.fx2-home-philosophy-copy .et_pb_text_inner {
+	display: grid;
+	gap: 1.25rem;
+	font-size: 1.125rem;
+	line-height: 1.75;
+	color: var(--fx2-text-secondary);
+}
+
+.fx2-home-philosophy-copy h3 {
+	font-size: 1.5rem;
+	font-weight: 600;
+	line-height: 1.3;
+	color: var(--fx2-foreground);
+}
+
+.fx2-home-philosophy-copy p {
+	margin: 0;
+}
+
+.fx2-philosophy-graphic-shell {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 30rem;
+	border: 1px solid var(--fx2-border);
+	border-radius: var(--fx2-radius-card);
+	background: linear-gradient(135deg, var(--fx2-surface), transparent);
+	overflow: hidden;
+}
+
+.fx2-dot-pattern {
+	position: absolute;
+	inset: 0;
+	background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+	background-size: 20px 20px;
+	mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 1), transparent 85%);
+}
+
+.fx2-philosophy-graphic-shell svg {
+	position: relative;
+	z-index: 1;
+	width: 8rem;
+	height: 8rem;
+	color: rgba(250, 250, 250, 0.22);
+}
+
+.et_pb_section.fx2-home-workflows {
+	padding: var(--fx2-section-space) 0;
+	background: var(--fx2-inverted-background);
+	color: var(--fx2-inverted-foreground);
+}
+
+.fx2-home-workflows-intro .et_pb_text_inner {
+	max-width: 42rem;
+	margin: 0 auto;
+	text-align: center;
+	display: grid;
+	gap: 1.5rem;
+}
+
+.fx2-home-workflows-intro p {
+	font-size: clamp(1.1rem, 2vw, 1.5rem);
+	line-height: 1.7;
+	font-weight: 300;
+	color: var(--fx2-inverted-muted);
+}
+
+.fx2-workflows-grid-row {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	margin-top: 4rem;
+}
+
+.fx2-workflow-card-shell {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+	height: 100%;
+	padding: 2.5rem;
+	border-radius: var(--fx2-radius-card);
+	background: var(--fx2-inverted-surface);
+	transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.fx2-workflow-card-shell:hover {
+	transform: translateY(-4px);
+	background: var(--fx2-inverted-surface-hover);
+}
+
+.fx2-workflow-icon {
+	width: 2.5rem;
+	height: 2.5rem;
+	color: var(--fx2-inverted-foreground);
+}
+
+.fx2-workflow-icon svg {
+	width: 100%;
+	height: 100%;
+}
+
+.fx2-workflow-card-shell h3 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+	color: var(--fx2-inverted-foreground);
+}
+
+.fx2-workflow-card-shell p {
+	margin: 0;
+	line-height: 1.7;
+	color: var(--fx2-inverted-muted);
+}
+
+.et_pb_section.fx2-home-benefits {
+	border-bottom: 1px solid var(--fx2-border);
+}
+
+.fx2-home-benefits-intro .et_pb_text_inner {
+	text-align: center;
+	display: grid;
+	gap: 1rem;
+}
+
+.fx2-eyebrow {
+	font-family: "Flex2 Geist Mono", monospace;
+	font-size: 0.875rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--fx2-text-subtle);
+}
+
+.fx2-home-benefits-intro span {
+	color: transparent;
+	background: linear-gradient(90deg, var(--fx2-foreground), rgba(250, 250, 250, 0.45));
+	-webkit-background-clip: text;
+	background-clip: text;
+}
+
+.fx2-benefits-stats-row {
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	align-items: stretch;
+	margin-top: 4rem;
+	padding: 4rem 0;
+	border-top: 1px solid var(--fx2-border);
+	border-bottom: 1px solid var(--fx2-border);
+	gap: 0;
+}
+
+.fx2-benefits-stats-row > .et_pb_column:not(:last-child) {
+	border-right: 1px solid var(--fx2-border);
+}
+
+.fx2-benefit-stat {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 0.75rem;
+	text-align: center;
+	padding: 0 1.5rem;
+}
+
+.fx2-benefit-value {
+	font-size: clamp(3rem, 6vw, 4.5rem);
+	line-height: 0.95;
+	font-weight: 700;
+	letter-spacing: -0.06em;
+	color: var(--fx2-foreground);
+}
+
+.fx2-benefit-label {
+	font-family: "Flex2 Geist Mono", monospace;
+	font-size: 0.875rem;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+	color: var(--fx2-text-subtle);
+}
+
+.et_pb_section.fx2-home-contact {
+	position: relative;
+	overflow: hidden;
+}
+
+.et_pb_section.fx2-home-contact::before {
+	content: "";
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: min(50rem, 90vw);
+	height: min(50rem, 90vw);
+	border-radius: 50%;
+	background: var(--fx2-surface);
+	filter: blur(120px);
+	transform: translate(-50%, -50%);
+	pointer-events: none;
+}
+
+.fx2-contact-row {
+	width: min(calc(100% - 3rem), var(--fx2-content-width)) !important;
+	max-width: none !important;
+	position: relative;
+	z-index: 1;
+}
+
+.fx2-home-contact-copy .et_pb_text_inner {
+	display: grid;
+	gap: 1.25rem;
+	text-align: center;
+}
+
+.fx2-home-contact-copy p {
+	font-size: 1.25rem;
+	line-height: 1.7;
+	font-weight: 300;
+	color: var(--fx2-text-secondary);
+}
+
+.fx2-home-contact-form {
+	margin-top: 1rem !important;
+}
+
+.fx2-contact-form-shell {
+	padding: 2rem;
+	border: 1px solid var(--fx2-border);
+	border-radius: var(--fx2-radius-card);
+	background: var(--fx2-surface);
+	backdrop-filter: blur(12px);
+	-webkit-backdrop-filter: blur(12px);
+}
+
+.fx2-contact-form-shell .ff-el-group,
+.fx2-contact-form-shell .ff-el-input--content,
+.fx2-contact-form-shell .ff-t-container {
+	margin-bottom: 1rem;
+}
+
+.fx2-contact-form-shell label,
+.fx2-contact-form-shell .ff-el-input--label label,
+.fx2-contact-form-shell .ff-el-is-required.asterisk-right label::after {
+	font-size: 0.875rem;
+	font-weight: 500;
+	color: var(--fx2-text-subtle);
+}
+
+.fx2-contact-form-shell input,
+.fx2-contact-form-shell textarea,
+.fx2-contact-form-shell select,
+.fx2-contact-form-shell .ff-el-form-control {
+	width: 100%;
+	padding: 1rem 1.1rem;
+	border: 1px solid var(--fx2-border);
+	border-radius: 1rem;
+	background: rgba(250, 250, 250, 0.03);
+	color: var(--fx2-foreground);
+	font-family: "Flex2 Geist", sans-serif;
+	font-size: 1rem;
+	box-shadow: none;
+}
+
+.fx2-contact-form-shell input::placeholder,
+.fx2-contact-form-shell textarea::placeholder {
+	color: var(--fx2-text-tertiary);
+}
+
+.fx2-contact-form-shell input:focus,
+.fx2-contact-form-shell textarea:focus,
+.fx2-contact-form-shell select:focus,
+.fx2-contact-form-shell .ff-el-form-control:focus {
+	outline: none;
+	border-color: rgba(250, 250, 250, 0.25);
+	background: rgba(250, 250, 250, 0.05);
+}
+
+.fx2-contact-form-shell .ff-btn,
+.fx2-contact-form-shell .ff-btn-submit,
+.fx2-contact-form-shell button[type="submit"],
+.fx2-contact-form-shell input[type="submit"] {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 3.25rem;
+	padding: 0.95rem 1.45rem;
+	border: 0;
+	border-radius: var(--fx2-radius-pill);
+	background: var(--fx2-primary);
+	color: var(--fx2-primary-foreground);
+	font-size: 0.875rem;
+	font-weight: 700;
+	line-height: 1;
+	box-shadow: 0 0 30px rgba(250, 250, 250, 0.08);
+	transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fx2-contact-form-shell .ff-btn:hover,
+.fx2-contact-form-shell .ff-btn-submit:hover,
+.fx2-contact-form-shell button[type="submit"]:hover,
+.fx2-contact-form-shell input[type="submit"]:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 0 30px rgba(250, 250, 250, 0.2);
+}
+
+.et_pb_section.fx2-global-footer {
+	padding: 3rem 0;
+	border-top: 1px solid var(--fx2-border);
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.fx2-footer-row {
+	grid-template-columns: minmax(0, 1fr) auto auto;
+	align-items: center;
+	gap: 1.5rem 2rem;
+}
+
+.fx2-footer-brand-shell {
+	display: grid;
+	gap: 0.5rem;
+	max-width: 22rem;
+	color: var(--fx2-text-secondary);
+}
+
+.fx2-footer-brand-mark {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	font-size: 1.125rem;
+	font-weight: 700;
+	letter-spacing: -0.04em;
+	color: var(--fx2-foreground);
+}
+
+.fx2-footer-brand-mark svg {
+	width: 1.25rem;
+	height: 1.25rem;
+	flex: none;
+}
+
+.fx2-footer-legal .et_pb_text_inner {
+	font-size: 0.875rem;
+	color: var(--fx2-text-tertiary);
+}
+
+.fx2-footer-links .et_pb_text_inner {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.fx2-footer-links-shell {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	gap: 0.75rem 1.5rem;
+	font-size: 0.875rem;
+	color: var(--fx2-text-tertiary);
+}
+
+.fx2-footer-links-shell a:hover,
+.fx2-footer-links-shell a:focus-visible {
+	color: var(--fx2-foreground);
+}
+
+body.admin-bar .et_pb_section.fx2-global-header {
+	top: 32px;
+}
+
+@media (max-width: 980px) {
+	.fx2-header-row,
+	.fx2-locations-row,
+	.fx2-philosophy-content-row,
+	.fx2-workflows-grid-row,
+	.fx2-benefits-stats-row,
+	.fx2-footer-row {
+		grid-template-columns: minmax(0, 1fr);
+	}
+
+	.fx2-header-nav .et_pb_text_inner,
+	.fx2-home-locations-list .et_pb_text_inner,
+	.fx2-footer-links .et_pb_text_inner {
+		justify-content: flex-start;
+	}
+
+	.fx2-header-nav-inner,
+	.fx2-header-links,
+	.fx2-location-list,
+	.fx2-footer-links-shell {
+		justify-content: flex-start;
+	}
+
+	.fx2-location-list li {
+		font-size: 1rem;
+	}
+
+	.fx2-benefits-stats-row > .et_pb_column:not(:last-child) {
+		border-right: 0;
+		border-bottom: 1px solid var(--fx2-border);
+		padding-bottom: 2rem;
+	}
+
+	.fx2-benefits-stats-row > .et_pb_column:not(:first-child) {
+		padding-top: 2rem;
+	}
+
+	.fx2-footer-legal .et_pb_text_inner,
+	.fx2-footer-links-shell {
+		text-align: left;
+	}
+}
+
+@media (max-width: 767px) {
+	:root {
+		--fx2-header-offset: 6.25rem;
+	}
+
+	.et_pb_section.fx2-global-header {
+		padding: 0.9rem 0;
+	}
+
+	body.admin-bar .et_pb_section.fx2-global-header {
+		top: 46px;
+	}
+
+	.fx2-home-hero-actions .et_pb_text_inner,
+	.fx2-hero-actions-wrap {
+		width: 100%;
+	}
+
+	.fx2-button-small,
+	.fx2-button-large,
+	.fx2-contact-form-shell .ff-btn,
+	.fx2-contact-form-shell .ff-btn-submit,
+	.fx2-contact-form-shell button[type="submit"],
+	.fx2-contact-form-shell input[type="submit"] {
+		width: 100%;
+	}
+
+	.fx2-contact-form-shell {
+		padding: 1.5rem;
+	}
+}
+
+@keyframes fx2-float-1 {
+	from {
+		transform: translate(0, 0) scale(1);
+	}
+
+	to {
+		transform: translate(5%, 10%) scale(1.1);
+	}
+}
+
+@keyframes fx2-float-2 {
+	from {
+		transform: translate(0, 0) scale(1);
+	}
+
+	to {
+		transform: translate(-4%, -8%) scale(1.08);
+	}
 }
