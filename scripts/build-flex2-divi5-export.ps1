@@ -339,12 +339,32 @@ $headerBrandHtml = @'
 
 $headerNavHtml = @'
 <div class="fx2-header-nav-inner">
-  <nav class="fx2-header-links" aria-label="Primary">
-    <a href="#philosophy">Philosophy</a>
-    <a href="#workflows">Workflows</a>
-    <a href="#benefits">Benefits</a>
-  </nav>
-  <a href="#contact" class="fx2-button fx2-button-small">Initiate Consultation</a>
+  <div class="fx2-header-nav-desktop">
+    <nav class="fx2-header-links" aria-label="Primary">
+      <a href="#philosophy">Philosophy</a>
+      <a href="#workflows">Workflows</a>
+      <a href="#benefits">Benefits</a>
+    </nav>
+    <a href="#contact" class="fx2-button fx2-button-small">Initiate Consultation</a>
+  </div>
+  <details class="fx2-mobile-nav">
+    <summary class="fx2-mobile-nav-toggle">
+      <span>Menu</span>
+      <span class="fx2-mobile-nav-icon" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </summary>
+    <div class="fx2-mobile-nav-panel">
+      <nav class="fx2-mobile-nav-links" aria-label="Mobile Primary">
+        <a href="#philosophy">Philosophy</a>
+        <a href="#workflows">Workflows</a>
+        <a href="#benefits">Benefits</a>
+      </nav>
+      <a href="#contact" class="fx2-button fx2-button-small fx2-mobile-nav-cta">Initiate Consultation</a>
+    </div>
+  </details>
 </div>
 '@
 

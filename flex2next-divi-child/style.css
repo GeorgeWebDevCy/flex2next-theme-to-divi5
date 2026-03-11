@@ -88,11 +88,27 @@ body::after {
 #page-container,
 #main-content,
 #et-main-area,
-#et-boc,
-.et-l {
+#et-boc {
 	background: transparent !important;
 	position: relative;
 	z-index: 1;
+}
+
+.et-l {
+	background: transparent !important;
+	position: relative;
+}
+
+#page-container .et-l.et-l--header,
+#page-container .et-l--header {
+	z-index: 1001 !important;
+}
+
+#page-container .et-l.et-l--body,
+#page-container .et-l--body,
+#page-container .et-l.et-l--footer,
+#page-container .et-l--footer {
+	z-index: 1 !important;
 }
 
 .et_pb_section.fx2-global-header,
@@ -176,12 +192,13 @@ body::after {
 	top: 0;
 	left: 0;
 	right: 0;
-	z-index: 999;
+	z-index: 1002 !important;
 	padding: 1.1rem 0;
 	background: rgba(0, 0, 0, 0.55);
 	border-bottom: 1px solid var(--fx2-border);
 	backdrop-filter: blur(12px);
 	-webkit-backdrop-filter: blur(12px);
+	pointer-events: auto;
 }
 
 .fx2-header-row {
@@ -189,6 +206,8 @@ body::after {
 	grid-template-columns: minmax(0, 16rem) minmax(0, 1fr);
 	align-items: center;
 	gap: 1.5rem;
+	position: relative;
+	z-index: 1003;
 }
 
 .fx2-header-row > .et_pb_column {
@@ -214,9 +233,21 @@ body::after {
 .fx2-header-nav .et_pb_text_inner {
 	display: flex;
 	justify-content: flex-end;
+	position: relative;
+	z-index: 1003;
 }
 
 .fx2-header-nav-inner {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: 1.5rem 2rem;
+	flex-wrap: wrap;
+	position: relative;
+	z-index: 1003;
+}
+
+.fx2-header-nav-desktop {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
@@ -242,6 +273,91 @@ body::after {
 .fx2-header-links a:hover,
 .fx2-header-links a:focus-visible {
 	color: var(--fx2-foreground);
+}
+
+.fx2-mobile-nav {
+	display: none;
+	position: relative;
+}
+
+.fx2-mobile-nav-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.85rem 1rem;
+	border: 1px solid var(--fx2-border);
+	border-radius: var(--fx2-radius-pill);
+	background: rgba(250, 250, 250, 0.04);
+	color: var(--fx2-foreground);
+	cursor: pointer;
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1;
+	list-style: none;
+}
+
+.fx2-mobile-nav-toggle::-webkit-details-marker {
+	display: none;
+}
+
+.fx2-mobile-nav-toggle::marker {
+	content: "";
+}
+
+.fx2-mobile-nav-icon {
+	display: grid;
+	gap: 0.25rem;
+}
+
+.fx2-mobile-nav-icon span {
+	display: block;
+	width: 1rem;
+	height: 2px;
+	border-radius: 999px;
+	background: currentColor;
+}
+
+.fx2-mobile-nav-panel {
+	position: absolute;
+	top: calc(100% + 0.75rem);
+	right: 0;
+	width: min(22rem, calc(100vw - 2rem));
+	padding: 1.25rem;
+	border: 1px solid var(--fx2-border);
+	border-radius: 1.25rem;
+	background: rgba(8, 8, 8, 0.96);
+	box-shadow: 0 1.25rem 3rem rgba(0, 0, 0, 0.35);
+	backdrop-filter: blur(18px);
+	-webkit-backdrop-filter: blur(18px);
+	display: grid;
+	gap: 1rem;
+	z-index: 1004;
+}
+
+.fx2-mobile-nav:not([open]) .fx2-mobile-nav-panel {
+	display: none;
+}
+
+.fx2-mobile-nav-links {
+	display: grid;
+	gap: 0.15rem;
+}
+
+.fx2-mobile-nav-links a {
+	padding: 0.85rem 0;
+	border-bottom: 1px solid rgba(250, 250, 250, 0.08);
+	color: var(--fx2-foreground);
+	font-size: 0.95rem;
+	font-weight: 500;
+	text-decoration: none;
+}
+
+.fx2-mobile-nav-links a:last-child {
+	border-bottom: 0;
+}
+
+.fx2-mobile-nav-cta {
+	width: 100%;
 }
 
 .et_pb_section.fx2-home-hero {
@@ -815,11 +931,30 @@ body.admin-bar .et_pb_section.fx2-global-header {
 		justify-content: flex-start;
 	}
 
-	.fx2-header-nav-inner,
+	.fx2-header-row {
+		grid-template-columns: minmax(0, 1fr) auto;
+	}
+
+	.fx2-header-nav .et_pb_text_inner {
+		justify-content: flex-end;
+	}
+
+	.fx2-header-nav-inner {
+		justify-content: flex-end;
+	}
+
 	.fx2-header-links,
 	.fx2-location-list,
 	.fx2-footer-links-shell {
 		justify-content: flex-start;
+	}
+
+	.fx2-header-nav-desktop {
+		display: none;
+	}
+
+	.fx2-mobile-nav {
+		display: block;
 	}
 
 	.fx2-location-list li {
@@ -849,6 +984,12 @@ body.admin-bar .et_pb_section.fx2-global-header {
 
 	.et_pb_section.fx2-global-header {
 		padding: 0.9rem 0;
+	}
+
+	.fx2-mobile-nav-panel {
+		right: 0;
+		left: auto;
+		width: min(20rem, calc(100vw - 1.5rem));
 	}
 
 	body.admin-bar .et_pb_section.fx2-global-header {
