@@ -1,0 +1,25 @@
+/*
+Theme Name: Flex2 Next Divi Child
+Theme URI: https://example.com/
+Description: Minimal Divi child theme for the Flex2 Next migration. It only loads the custom Geist font faces used by the imported Divi 5 layout.
+Author: George Nicolaou	
+Template: Divi
+Version: 1.0.0
+Text Domain: flex2next-divi-child
+*/
+
+@font-face {
+	font-family: "Flex2 Geist";
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url("assets/fonts/flex2-geist.woff2") format("woff2");
+}
+
+@font-face {
+	font-family: "Flex2 Geist Mono";
+	font-style: normal;
+	font-weight: 100 900;
+	font-display: swap;
+	src: url("assets/fonts/flex2-geist-mono.woff2") format("woff2");
+}
